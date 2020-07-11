@@ -57,15 +57,6 @@ class App extends Component {
         super();
         this.state.grid[this.state.start[0]][this.state.start[1]] = 3; // special point : start point
         this.state.grid[this.state.end[0]][this.state.end[1]] = 4; // special point : end point
-        let heuristics = this.state.heuristics;
-        for(let i = 0; i < this.state.height; i++)
-        {
-            for(let j = 0; j < this.state.width; j++)
-            {
-                heuristics[i][j] = Math.abs(this.state.end[0]-i) + Math.abs(this.state.end[1]-j);
-            }
-        }
-        this.setState({heuristics});
 
     }
     changeGrid=(grid)=>this.setState(grid);
@@ -78,6 +69,7 @@ class App extends Component {
         this.setState({
             changeSource: !this.state.changeSource,
             start: [i, j],
+            grid,
         });
     }
     changedDestination = (i,j)=> {
@@ -95,7 +87,17 @@ class App extends Component {
     showModal = () => this.setState({ modalshow: true });
     hideModal = () => this.setState({ modalshow: false });
 
-
+    computeHeuristics= ()=>{
+        let heuristics = this.state.heuristics;
+        for(let i = 0; i < this.state.height; i++)
+        {
+            for(let j = 0; j < this.state.width; j++)
+            {
+                heuristics[i][j] = Math.abs(this.state.end[0]-i) + Math.abs(this.state.end[1]-j);
+            }
+        }
+        this.setState({heuristics});
+    }
     randomizeMatrix = () => {
         this.clearGrid();
         const newGrid = Array(this.state.height).fill(undefined, undefined, undefined).map(() => Array(this.state.width).fill(0));
@@ -136,6 +138,7 @@ class App extends Component {
 
     selectAlgo = (name) => this.setState({currentAlgo: name});
     visualize = async () => {
+
         if (this.state.currentAlgo === "dfs") {
             this.setState({path:[]});
             let stack = [this.state.start];
@@ -282,6 +285,7 @@ class App extends Component {
         }
         if(this.state.currentAlgo === "bestfs")
         {
+            this.computeHeuristics();
             this.setState({path:[]});
             let pq = new PriorityQueue();
             pq.enqueue(this.state.start,this.state.heuristics[this.state.start[0]][this.state.start[1]]);
@@ -351,6 +355,7 @@ class App extends Component {
 
         if(this.state.currentAlgo === "a-star")
         {
+            this.computeHeuristics();
             this.setState({path:[]});
             let pq = new PriorityQueue();
             pq.enqueue(this.state.start,this.state.heuristics[this.state.start[0]][this.state.start[1]]);
