@@ -9,17 +9,6 @@ the first page welcomes you with an easy question, answering which takes you to 
 
 You can go and check it out yourself at [Mars Colonizer!](https://radhesh-sarma.github.io/mars-colonization-project/)  
 
-### Features Available  
-
-* Information & Tutorial tabs, to guide you around.  
-* Have fun visualizing a once start, multi-stops paths  
-* Varying speeds to visualize the path  
-* Generate a random maze, or create your own, by simply toggling and dragging on the play grid  
-* A range of algorithms, running at different optimal paces  
-* Dijkstra's, A_, Weighted A_ etc (weighted algorithms)  
-* BFS, DFS (in the unweighted category)  
-* Even Bidirectional searches for path, in Bidirectional Dijkstra, Bidirectional A\*, Bidirectional BFS and more!  
-
 ![First page](/public/intro.png?raw=true)
 
 ![Main page](/public/main.png?raw=true)
