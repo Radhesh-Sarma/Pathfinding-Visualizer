@@ -15,7 +15,7 @@ import {
  */
 export default function Root() {
   return (
-    <Router>
+    <Router >
       <Switch>
         <Route exact path="/mars-colonization-project">
           <Home />
