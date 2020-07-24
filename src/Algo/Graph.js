@@ -15,10 +15,8 @@ class Graph {
         fill().map(() =>
           Array(height*width).fill(1000000));
     this.grid = grid;
-    this.map1 = new Map();
-    this.map2 = new Map();
-    this.height = height;
-    this.width = width;
+    this.map1 = new Map(); this.map2 = new Map();
+    this.height = height; this.width = width;
     let counter = 0;
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
@@ -31,7 +29,6 @@ class Graph {
     this.constructGraph();
     this.floydWarshall();
   }
-
   /**
    *
    * @param {number} vertex
@@ -41,7 +38,6 @@ class Graph {
       this.adjacencyList[parseInt(vertex, 10)] = [];
     }
   }
-
   /**
    *
    * @param {number} source
@@ -57,7 +53,6 @@ class Graph {
     this.adjacencyList[parseInt(source, 10)].push(parseInt(destination, 10));
     this.adjacencyList[parseInt(destination, 10)].push(parseInt(source, 10));
   }
-
   /**
    *
    * @param {number} i
@@ -71,7 +66,6 @@ class Graph {
       return this.grid[parseInt(i, 10)][parseInt(j, 10)] !== 1;
     }
   }
-
   /**
    *
    */
@@ -94,7 +88,6 @@ class Graph {
       }
     }
   }
-
   /**
    *Floyd Warshal Algo to store distances betwenn all pairs of vertices
    */
@@ -113,7 +106,6 @@ class Graph {
     }
   }
 }
-
 Graph.propTypes = {
   grid: PropTypes.array,
 };

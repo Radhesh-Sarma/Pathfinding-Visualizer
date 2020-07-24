@@ -12,7 +12,8 @@ export const TSP = async function() {
     unvisited.delete(togo);
     const sourceMapped = this.state.graph.map2[now];
     const destinationMapped = this.state.graph.map2[togo];
-    if (this.state.graph.allPairShortest[sourceMapped][destinationMapped] === 1000000) {
+    if (this.state.graph.allPairShortest[sourceMapped][destinationMapped] ===
+        1000000) {
       pathfound = false;
       break;
     }
@@ -25,6 +26,7 @@ export const TSP = async function() {
   } else {
     this.showModal();
     this.setState({visual: false});
+    return;
   }
 };
 
@@ -60,7 +62,7 @@ export const aStarForTSP = async function(AppState, start, end) {
           [...dp[current[0]][current[1]], current].length) {
         pq.push([[current[0], current[1] + 1],
           dp[current[0]][current[1]].length+
-        AppState.state.heuristics[current[0]][current[1] + 1]]);
+          AppState.state.heuristics[current[0]][current[1] + 1]]);
         dp[current[0]][current[1] + 1] =
             [...dp[current[0]][current[1]], current];
       }
@@ -73,7 +75,7 @@ export const aStarForTSP = async function(AppState, start, end) {
           [...dp[current[0]][current[1]], current]) {
         pq.push([[current[0] + 1, current[1]],
           dp[current[0]][current[1]].length+
-        AppState.state.heuristics[current[0] + 1][current[1]]]);
+          AppState.state.heuristics[current[0] + 1][current[1]]]);
         dp[current[0] + 1][current[1]] =
             [...dp[current[0]][current[1]], current];
       }
@@ -97,7 +99,7 @@ export const aStarForTSP = async function(AppState, start, end) {
           [...dp[current[0]][current[1]], current].length) {
         pq.push([[current[0], current[1] - 1],
           dp[current[0]][current[1]].length+
-        AppState.state.heuristics[current[0]][current[1] - 1]]);
+          AppState.state.heuristics[current[0]][current[1] - 1]]);
         dp[current[0]][current[1] - 1] =
             [...dp[current[0]][current[1]], current];
       }
@@ -120,6 +122,13 @@ export const aStarForTSP = async function(AppState, start, end) {
   await AppState.setState({grid});
   return dp[end[0]][end[1]];
 };
+/**
+ * This returns the nearest unvisited destination
+ * @param {anyObject} AppState
+ * @param {number} unvisited
+ * @param {number} source
+ * @return {*}
+ */
 export const findOptimalVertex = (AppState, unvisited, source) => {
   const pq = new PriorityQueue((a, b) => a[1] < b[1]);
   const sourceMapped = AppState.state.graph.map2[source];

@@ -1,6 +1,5 @@
 import PriorityQueue from "./customPriorityQueue";
 import {biNeighbors} from "./Utility";
-
 export const BidirectionalDijkstra = async function() {
   const start = this.state.start[0];
   const end = this.state.end[0];
@@ -32,7 +31,6 @@ export const BidirectionalDijkstra = async function() {
     Array(width).fill(100000));
   dist1[start[0]][start[1]] = 0;
   dist2[end[0]][end[1]] = 0;
-
   while (!forwardPQ.isEmpty() && !backwardPQ.isEmpty()) {
     const grid = this.state.grid;
     const current1 = forwardPQ.peek()[0];
@@ -55,7 +53,6 @@ export const BidirectionalDijkstra = async function() {
         ok = 1;
         break;
       }
-
       if ( dist1[current1[0]][current1[1]] + 1< dist1[item[0]][item[1]]) {
         dist1[item[0]][item[1]] = dist1[current1[0]][current1[1]] + 1;
         par1[item[0]][item[1]] = current1;
@@ -71,7 +68,6 @@ export const BidirectionalDijkstra = async function() {
       if (item[0] === end[0] && item[1] === end[1]) {
         continue;
       }
-
       if (visited1[item[0]][item[1]] === 1) {
         meetpoint2 = current2;
         meetpoint1 = item;
@@ -94,7 +90,6 @@ export const BidirectionalDijkstra = async function() {
       break;
     }
   }
-
   // Retrieving the found path
   let ptr = meetpoint1;
   let ok1 = true;
@@ -136,6 +131,5 @@ export const BidirectionalDijkstra = async function() {
   }
   pth2 = pth2.reverse();
   this.state.path = this.state.path.concat(pth2);
-  // console.log(this.state.path);
   await this.pathdisplay(this.state.path);
 };

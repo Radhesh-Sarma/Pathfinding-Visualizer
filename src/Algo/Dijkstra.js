@@ -1,4 +1,5 @@
 import PriorityQueue from "./customPriorityQueue";
+import {directions, pathrestore} from "./Utility";
 
 export const Dijkstra = async function() {
   const start = this.state.start; const end = this.state.end;
@@ -18,10 +19,6 @@ export const Dijkstra = async function() {
   while (queue.size() !== 0) {
     const current = queue.peek()[0];
     queue.pop(); // pop the queue
-    if (grid[current[0]][current[1]] === 1 ||
-        grid[current[0]][current[1]] === 2) {
-      continue; // if a wall or visited continue
-    }
     if (grid[current[0]][current[1]] === 3) {
       if (ok) {
         ok = false;
@@ -30,6 +27,7 @@ export const Dijkstra = async function() {
       } // if you are again pushing the source point, its !ok
     }
     if (grid[current[0]][current[1]] === 4) {
+      // if you reach the destination, terminate
       this.setState({grid, pointer: current});
       await new Promise((done) =>
         setTimeout(() => done(), this.state.speed));
@@ -37,42 +35,27 @@ export const Dijkstra = async function() {
     } else {
       // dijkstra picks the minimum weight path,
       // updates it in its distance array
-      if (current[0] !== height - 1 &&
-          grid[current[0] + 1][current[1]] !== 2) {
-        if (dist[current[0] + 1][current[1]] >
-            dist[current[0]][current[1]] + 1) {
-          dist[current[0] + 1][current[1]] = dist[current[0]][current[1]] + 1;
-          par[current[0] + 1][current[1]] = [current[0], current[1]];
-          queue.push([[current[0] + 1, current[1]],
-            dist[current[0] + 1][current[1]]]);
+      const item = [];
+      for (const direction of directions) {
+        const neighbor = [current[0] + direction[0], current[1] + direction[1]];
+        if (neighbor[0] < 0 || neighbor[0] >= grid.length ||
+            neighbor[1] < 0 || neighbor[1] >=grid[0].length) {
+          continue;
+        }
+        if (grid[neighbor[0]][neighbor[1]] !== 1) {
+          item.push([neighbor[0], neighbor[1]]); // if not a wall
         }
       }
-      if (current[1] !== width - 1 &&
-          grid[current[0]][current[1] + 1] !== 2) {
-        if (dist[current[0]][current[1] + 1] >
+      // iterate over non wall neighbors
+      for (const neighbor of item) {
+        if (dist[neighbor[0]][neighbor[1]] >
             dist[current[0]][current[1]] + 1) {
-          dist[current[0]][current[1] + 1] = dist[current[0]][current[1]] + 1;
-          par[current[0]][current[1] + 1] = [current[0], current[1]];
-          queue.push([[current[0], current[1] + 1],
-            dist[current[0]][current[1] + 1]]);
-        }
-      }
-      if (current[0] !== 0 && grid[current[0] - 1][current[1]] !== 2) {
-        if (dist[current[0] - 1][current[1]] >
-            dist[current[0]][current[1]] + 1) {
-          dist[current[0] - 1][current[1]] = dist[current[0]][current[1]] + 1;
-          par[current[0] - 1][current[1]] = [current[0], current[1]];
-          queue.push([[current[0] - 1, current[1]],
-            dist[current[0] - 1][current[1]]]);
-        }
-      }
-      if (current[1] !== 0 && grid[current[0]][current[1] - 1] !== 2) {
-        if (dist[current[0]][current[1] - 1] >
-            dist[current[0]][current[1]] + 1) {
-          dist[current[0]][current[1] - 1] = dist[current[0]][current[1]] + 1;
-          par[current[0]][current[1] - 1] = [current[0], current[1]];
-          queue.push([[current[0], current[1] - 1],
-            dist[current[0]][current[1]-1]]);
+          dist[neighbor[0]][neighbor[1]] = dist[current[0]][current[1]] + 1;
+          par[neighbor[0]][neighbor[1]] = [current[0], current[1]];
+          queue.push([[neighbor[0], neighbor[1]],
+            dist[neighbor[0]][neighbor[1]]]);
+          // push in the queue if the current vertex can give a shorter path
+          // than previous used vertices
         }
       }
       if (grid[current[0]][current[1]] !== 3) {
@@ -89,17 +72,6 @@ export const Dijkstra = async function() {
     this.setState({visual: false});
     return;
   }
-  let ptr = [end[0][0], end[0][1]];
-  ok = true;
-  while (ok) {
-    this.state.path = [...this.state.path, ptr];
-    if (ptr[0] === start[0][0] &&
-        ptr[1] === start[0][1]) {
-      ok = false;
-    } else {
-      ptr = par[ptr[0]][ptr[1]];
-    }
-  }
-  this.state.path = this.state.path.reverse();
+  this.state.path = pathrestore(start, end, par);
   await this.pathdisplay(this.state.path);
 };

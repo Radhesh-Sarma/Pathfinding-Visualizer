@@ -1,4 +1,4 @@
-const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+export const directions = [[1, 0], [0, 1], [-1, 0], [0, -1]];
 const isFeasable = (i, j, grid) => {
   if (i < 0 || i >=grid.length || j < 0 || j >=grid[0].length) {
     return false;
@@ -38,4 +38,19 @@ export const biNeighbors = (i, j, grid) => {
   return answer;
 };
 
+export const pathrestore = (start, end, par) => {
+  let ptr = end[0];
+  let path = [];
+  let ok = true;
+  while (ok) {
+    path = [...path, ptr];
+    if (ptr[0] === start[0][0] &&
+        ptr[1] === start[0][1]) {
+      ok = false;
+    } else {
+      ptr = par[ptr[0]][ptr[1]];
+    }
+  }
+  return path.reverse();
+};
 

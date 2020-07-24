@@ -1,6 +1,5 @@
 import PriorityQueue from "./customPriorityQueue";
-import {neighbors} from "./Utility";
-
+import {neighbors, pathrestore} from "./Utility";
 export const AStar = async function(w1, w2) {
   this.computeHeuristics();
   this.setState({path: [], pointer: this.state.start[0]});
@@ -9,9 +8,11 @@ export const AStar = async function(w1, w2) {
   const start = this.state.start; const end = this.state.end;
   const heuristics = this.state.heuristics; const speed = this.state.speed;
   pq.push([start[0], heuristics[start[0][0]][start[0][1]]]);
-  const dp = Array(height).fill().map(() => Array(width).fill([]));
   const par = Array(height).fill().map(() => Array(width).fill([]));
   par[start[0][0]][start[0][1]] = start[0];
+  const dist = Array(height).fill().map(() =>
+    Array(width).fill(100000));
+  dist[start[0][0]][start[0][1]] = 0;
   while (!pq.isEmpty()) {
     const grid = this.state.grid;
     const current = pq.peek()[0];
@@ -21,19 +22,13 @@ export const AStar = async function(w1, w2) {
       this.setState({grid, pointer: current});
       break;
     }
-    const item = neighbors(current[0], current[1], this.state.grid);
-    for (let i =0; i < item.length; i++) {
-      if ((dp[item[parseInt(i, 10)][0]][item[parseInt(i, 10)][1]].length ===
-          0) ||
-          (dp[item[parseInt(i, 10)][0]][item[parseInt(i, 10)][1]].length >
-              dp[current[0]][current[1]].length + 1)) {
-        pq.push([item[parseInt(i, 10)],
-          w1*(dp[current[0]][current[1]].length+1) +
-          w2*this.state.
-              heuristics[item[parseInt(i, 10)][0]][item[parseInt(i, 10)][1]]]);
-        par[item[parseInt(i, 10)][0]][item[parseInt(i, 10)][1]] = current;
-        dp[item[parseInt(i, 10)][0]][item[parseInt(i, 10)][1]] =
-            [...dp[current[0]][current[1]], current];
+    const neighbor = neighbors(current[0], current[1], this.state.grid);
+    for (const item of neighbor) {
+      if (dist[item[0]][item[1]] === 100000 ||
+          dist[current[0][current[1]]] + 1 < dist[item[0]][item[1]]) {
+        dist[item[0]][item[1]] = dist[current[0]][current[1]] + 1;
+        par[item[0]][item[1]] = current;
+        pq.push([item, dist[item[0]][item[1]] + heuristics[item[0]][item[1]]]);
       }
     }
     grid[current[0]][current[1]] = 2;
@@ -47,18 +42,6 @@ export const AStar = async function(w1, w2) {
     this.setState({visual: false});
     return;
   }
-  let ptr = end[0];
-  let path = [];
-  let ok = true;
-  while (ok) {
-    path = [...path, ptr];
-    if (ptr[0] === start[0][0] &&
-        ptr[1] === start[0][1]) {
-      ok = false;
-    } else {
-      ptr = par[ptr[0]][ptr[1]];
-    }
-  }
-  this.state.path = path.reverse();
+  this.state.path = pathrestore(start, end, par);
   await this.pathdisplay(this.state.path);
 };

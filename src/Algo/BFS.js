@@ -1,4 +1,4 @@
-import {neighbors} from "./Utility";
+import {neighbors, pathrestore} from "./Utility";
 export const BFS = async function() {
   const start = this.state.start; const end = this.state.end;
   const height = this.state.height; const width = this.state.width;
@@ -6,8 +6,10 @@ export const BFS = async function() {
   this.setState({pointer: start[0]});
   const queue = [start[0]]; // queue needed in bfs
   const par = Array(height).fill().map(() => Array(width).fill([]));
+  // parent array to restore the path
   par[start[0][0]][start[0][1]] = start[0];
   let ok = true;
+  // grid is acting like a visited array in BFS
   while (queue.length !== 0) {
     const current = queue[0];
     queue.shift(); // pop the first item from the queue
@@ -17,7 +19,7 @@ export const BFS = async function() {
       // if its a wall or already visited cell then continue
     }
     if (grid[current[0]][current[1]] === 3) {
-      // if again visits the start point
+      // check if again visits the start point
       if (ok) {
         ok = false;
       } else {
@@ -25,7 +27,7 @@ export const BFS = async function() {
       }
     }
     if (grid[current[0]][current[1]] === 4) {
-      // reached goal
+      // reached goal, so terminate
       this.setState({grid});
       this.setState({pointer: current});
       await new Promise((done) =>
@@ -33,18 +35,18 @@ export const BFS = async function() {
       break;
     } else {
       const item = neighbors(current[0], current[1], this.state.grid);
-      // finding neighbours of the current cell
+      // finding neighbours of the current cell which are unvisited and empty
       for (const neighbor of item) {
         par[neighbor[0]][neighbor[1]] = [current[0], current[1]];
         queue.push([neighbor[0], neighbor[1]]);
-        // push the neighbours in the queue
+        // push the unvisited neighbours in the queue
       }
       if (grid[current[0]][current[1]] !== 3) {
         grid[current[0]][current[1]] = 2;
         // if not end/start, mark the node as visited
       }
       this.setState({grid, pointer: current});
-
+      // update the state
       await new Promise((done) =>
         setTimeout(() => done(), speed)); // to slow down the speed of animation
     }
@@ -56,18 +58,8 @@ export const BFS = async function() {
     this.setState({visual: false});
     return;
   }
-  let ptr = end[0];
-  let path = [];
-  ok = true;
-  while (ok) {
-    path = [...path, ptr];
-    if (ptr[0] === start[0][0] &&
-        ptr[1] === start[0][1]) {
-      ok = false;
-    } else {
-      ptr = par[ptr[0]][ptr[1]];
-    }
-  }
-  this.state.path = path.reverse();
+
+  // restore path
+  this.state.path = pathrestore(start, end, par);
   await this.pathdisplay(this.state.path);
 };
