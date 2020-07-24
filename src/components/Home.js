@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import BackgroundSlider from "react-background-slider";
 import mars1 from "../media/mars1.jpg";
-import mars2 from "../media/mars2.jpg";
 import mars3 from "../media/mars3.jpg";
 import mars4 from "../media/mars4.png";
 import mars5 from "../media/mars5.jpg";
@@ -191,8 +190,9 @@ class Home extends Component {
             width: "25%",
             height: "25%",
             fontSize: "2em",
+            textAlign:"center",
             marginTop: "35px"}}>
-          <p><b>&nbsp;&nbsp;&nbsp;&nbsp;MISSION</b></p>
+          <p><b>&nbsp;&nbsp;MISSION</b></p>
           <p><b> COLONIZE MARS! </b></p>
         </div>
 
@@ -200,9 +200,11 @@ class Home extends Component {
         <Button variant="primary" size="lg" onClick={this.handleShow} style={{
           backgroundColor: "#283618",
           color: "#fefae0",
-          position: "relative",
-          margin: "20%",
-          marginLeft: "38%",
+          position:"relative center",
+          marginTop:"20%",
+          marginLeft:"43%",
+          scrollMarginTop:"20%",
+          scrollMarginLeft:"43%",
         }}>
           <strong>LAUNCH TO MARS</strong>
         </Button>
@@ -213,8 +215,8 @@ class Home extends Component {
           handleShow={this.handleShow}
           onSubmit={this.onSubmit.bind(this)}/>
         <BackgroundSlider
-          images={[mars7, mars1, mars2, mars5, mars7,
-            mars3, mars4, mars8, mars9, mars6]}
+          images={[mars7, mars1, mars5, mars7,
+            mars3, mars8, mars4, mars6, mars9]}
           duration={3}
           transition={0}/>
       </div>
