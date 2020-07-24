@@ -58,7 +58,6 @@ export const BFS = async function() {
     this.setState({visual: false});
     return;
   }
-
   // restore path
   this.state.path = pathrestore(start, end, par);
   await this.pathdisplay(this.state.path);

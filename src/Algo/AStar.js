@@ -28,7 +28,8 @@ export const AStar = async function(w1, w2) {
           dist[current[0][current[1]]] + 1 < dist[item[0]][item[1]]) {
         dist[item[0]][item[1]] = dist[current[0]][current[1]] + 1;
         par[item[0]][item[1]] = current;
-        pq.push([item, dist[item[0]][item[1]] + heuristics[item[0]][item[1]]]);
+        pq.push([item, w1*dist[item[0]][item[1]] +
+        w2*heuristics[item[0]][item[1]]]);
       }
     }
     grid[current[0]][current[1]] = 2;

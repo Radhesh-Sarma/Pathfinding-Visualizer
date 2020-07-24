@@ -88,7 +88,8 @@ class PriorityQueue {
    * @private
    */
   _greater(i, j) {
-    return this._comparator(this._heap[parseInt(i, 10)], this._heap[parseInt(j, 10)]);
+    return this._comparator(this._heap[parseInt(i, 10)],
+        this._heap[parseInt(j, 10)]);
   }
 
   /**

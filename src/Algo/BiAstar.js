@@ -96,7 +96,6 @@ export const BiAstar = async function() {
       break;
     }
   }
-
   // Retrieving the found path
   let ptr = meetpoint1;
   let ok1 = true;
