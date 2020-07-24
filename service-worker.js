@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mars-colonization-project/precache-manifest.be9ffaccb417a36e0c89cd78230bb7d6.js"
+  "/mars-colonization-project/precache-manifest.94881317f79a2aa56e0fdb0e667de5a6.js"
 );
 
 self.addEventListener('message', (event) => {
