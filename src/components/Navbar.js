@@ -28,13 +28,8 @@ class Navbar extends React.Component {
     if (!this.state.checkedA) {
       this.editButtons();
     } else {
-      document.getElementById("chngDestBtn").innerHTML =
-          "<button class=\"btn\" " +
-          "type='button'  " +
-          "onClick={this.props.toggleDestination} " +
-          " style=\"background-color:#6a040f; color:peachpuff\">"+
-          "Change Destination"+
-          "</ button>";
+      document.getElementById("chngDestBtn").innerHTML = "Change Destination";
+
       this.props.multiDestination();
     }
     this.setState({checkedA: !this.state.checkedA});
@@ -44,13 +39,8 @@ class Navbar extends React.Component {
    * Changes the buttons when multiple destination toggle is changed
    */
   editButtons() {
-    document.getElementById("chngDestBtn").innerHTML =
-        "<button " +
-        "class=\"btn\" " +
-        "type='button' "+
-        " style='background-color:#6a040f;color:peachpuff' >"+
-        "Add Destination"+
-        "</button>";
+    document.getElementById("chngDestBtn").innerHTML = "Add Destination";
+
     this.props.multiDestination();
   }
   /**
@@ -112,9 +102,9 @@ class Navbar extends React.Component {
                     Change Source
                 </button>
               </li>
-              <li className="nav-item"
-                id="chngDestBtn">
+              <li className="nav-item">
                 <button onClick={this.props.toggleDestination}
+                        id="chngDestBtn"
                   className="btn"
                   style={{
                     backgroundColor: "#6a040f",
