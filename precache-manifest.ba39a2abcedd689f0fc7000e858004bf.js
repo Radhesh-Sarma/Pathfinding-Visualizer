@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "afd5377ef1c0950734e1e7c306a40d46",
+    "revision": "2be6e36cc35328871753e05ea63c42c9",
     "url": "/mars-colonization-project/index.html"
   },
   {
