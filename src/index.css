@@ -129,7 +129,6 @@ button:hover {
 .modal.right .modal-content {
   height: 100%;
   overflow-y: auto;
-
 }
 
 .modal.left .modal-dialog {
@@ -164,7 +163,6 @@ button:hover {
 .modal.left .modal-content {
   height: 100%;
   overflow-y: auto;
-
 }
 
 .modal.left.fade .modal-dialog {

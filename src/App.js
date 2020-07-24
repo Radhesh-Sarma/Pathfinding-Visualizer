@@ -15,66 +15,66 @@ import {BiAstar} from "./Algo/BiAstar";
 import {BidirectionalDijkstra} from "./Algo/BidirectionalDijkstra";
 import Graph from "./Algo/Graph";
 
-//instructs user to select an algorithm first
+// instructs user to select an algorithm first
 const Instruct = () => {
   return (
-      <div
-          style={{ position: "fixed", top: "200px", color: "white", left: "44vw" ,opacity:"80%"}}
-          className="p-4 bg-dark rounded shadow-lg animation-target"
-      >
+    <div
+      style={{position: "fixed", top: "200px", color: "white", left: "44vw", opacity: "80%"}}
+      className="p-4 bg-dark rounded shadow-lg animation-target"
+    >
         Please select an Algorithm first & then Visualize!
-      </div>
+    </div>
   );
 };
 
 // This is the modal to display path not found
 const D = ({handleClose, show}) => {
   return (
-      <>
-        <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-            style={{
-              opacity: "90%",
-              backgroundColor: "#000000",
-              color: "#fee440",
-            }}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Uh-Oh!!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+    <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        style={{
+          opacity: "90%",
+          backgroundColor: "#000000",
+          color: "#fee440",
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Uh-Oh!!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
             PATH TO THE TARGET NOT FOUND!
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
-//This is the path length modal, shown after the process
+// This is the path length modal, shown after the process
 const PathModal = ({handleClose, show, pathlength}) => {
   return (
-      <>
-        <Modal
-            show={show}
-            onHide={handleClose}
-            style={{
-              marginLeft:'0',
-              opacity:'70%',
+    <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        style={{
+          marginLeft: "0",
+          opacity: "70%",
 
-            }}
-        >
-          <Modal.Header closeButton>
+        }}
+      >
+        <Modal.Header closeButton>
             Path length:  {pathlength}
-          </Modal.Header>
-        </Modal>
-      </>
+        </Modal.Header>
+      </Modal>
+    </>
   );
 };
 /**
@@ -88,12 +88,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: 17, // height of the grid
-      width: 30, // width of the grid
+      height: 20, // height of the grid
+      width: 20, // width of the grid
       start: [[10, 9]], // start position
       end: [[10, 15]], // end position
       grid: Array(20).fill().map(() => Array(20).fill(0)),
-      speed: 0.100, // speed for animation
+      speed: 1, // speed for animation
       pointer: [], // store the pointer for visualization
       pointer2: [], // for bidirectional visualization
       modalshow: false,
@@ -104,9 +104,9 @@ class App extends Component {
       changeSource: false,
       changeDestination: false,
       multipledestinations: false,
-      showInstruct:false,
+      showInstruct: false,
       visual: false,
-      pathmodal:false,
+      pathmodal: false,
       pathlength: 0,
       currentAlgo: "Not Selected",
       bi: false, // boolean indicator for bidirectional algos
@@ -145,14 +145,15 @@ class App extends Component {
     });
   }
   changedDestination = (i, j) => {
-    console.log(this.state.multipledestinations,this.state.changeDestination);
+    console.log(this.state.multipledestinations, this.state.changeDestination);
     const grid = this.state.grid;
 
     if (this.state.multipledestinations && this.state.changeDestination) {
       grid[parseInt(i, 10)][parseInt(j, 10)] = 4; // special point : end point
-      this.setState({end: [...this.state.end, [i, j]], changeDestination: false, grid});
+      this.setState({end: [...this.state.end, [i, j]],
+        changeDestination: false, grid});
       return;
-    } else if(this.state.changeDestination) {
+    } else if (this.state.changeDestination) {
       grid[this.state.end[0][0]][this.state.end[0][1]] = 0;
       grid[parseInt(i, 10)][parseInt(j, 10)] = 4; // special point : end point
     }
@@ -193,7 +194,7 @@ class App extends Component {
   randomizeMatrix = () => {
     this.clearGrid();
     const newGrid = Array(this.state.height).fill().map(() =>
-        Array(this.state.width).fill(0));
+      Array(this.state.width).fill(0));
     for (let i = 0; i < this.state.height; i++) {
       for (let j = 0; j < this.state.width; j++) {
         newGrid[parseInt(i, 10)][parseInt(j, 10)] =
@@ -210,7 +211,7 @@ class App extends Component {
   }
   clearGrid = () => {
     const newGrid = Array(this.state.height).fill().map(() =>
-        Array(this.state.width).fill(0));
+      Array(this.state.width).fill(0));
     newGrid[this.state.start[0][0]][this.state.start[0][1]] = 3;
     // special point : start
     newGrid[this.state.end[0][0]][this.state.end[0][1]] = 4;
@@ -237,8 +238,8 @@ class App extends Component {
   selectAlgo = (name) => this.setState({currentAlgo: name});
   visualize = async () => {
     if (this.state.currentAlgo === "Not Selected") {
-      this.setState({ showInstruct: true });
-      setTimeout(() => this.setState({ showInstruct: false }), 3000);
+      this.setState({showInstruct: true});
+      setTimeout(() => this.setState({showInstruct: false}), 3000);
       return;
     }
     const pointer = this.state.pointer;
@@ -293,7 +294,7 @@ class App extends Component {
     await new Promise((done) => setTimeout(() => done(), this.state.speed));
     this.setState({grid, visual: false,
       pathlength: path.length,
-      pathmodal:true,
+      pathmodal: true,
       bi: false, pointer: [], pointer2: []});
   }
   clearPath = () => {
@@ -310,43 +311,44 @@ class App extends Component {
 
   render() {
     return (
-        <div>
-          <div id="navigation">
-            <Navbar randomize={this.randomizeMatrix}
-                    clearWalls={this.clearGrid}
-                    newSpeed={this.changeSpeed}
-                    multiDestination={this.multiDestination}
-                    handle={this.selectAlgo}
-                    selectedAlgo={this.currentAlgo}
-                    visualize={this.visualize}
-                    clearPath = {this.clearPath}
-                    multipledestinations = {this.state.multipledestinations}
-                    visual={this.state.visual}
-                    toggleSource= {this.toggleSource}
-                    toggleDestination=
-                        {this.toggleDestination}/>
-          </div>
-          <div id="Board">
-            <Grid start={this.state.start} end={this.state.end}
-                  height={this.state.height}
-                  multipledestinations = {this.state.multipledestinations}
-                  bi={this.state.bi}
-                  width={this.state.width}
-                  grid={this.state.grid}
-                  changeState={this.changeState}
-                  changesourcefunc={this.changedSource}
-                  changedestfunc = {this.changedDestination}
-                  pointer={this.state.pointer}
-                  pointer2={this.state.pointer2}
-                  changeSource = {this.state.changeSource}
-                  changeDestination = {this.state.changeDestination} />
-          </div>
-          <D show={this.state.modalshow} handleClose={this.hideModal} />
-          <PathModal show={this.state.pathmodal} handleClose={this.hidePathModal} pathlength={this.state.pathlength} />
-          {this.state.showInstruct ? <Instruct /> : null}
-
-
+      <div>
+        <div id="navigation">
+          <Navbar randomize={this.randomizeMatrix}
+            clearWalls={this.clearGrid}
+            newSpeed={this.changeSpeed}
+            multiDestination={this.multiDestination}
+            handle={this.selectAlgo}
+            selectedAlgo={this.currentAlgo}
+            visualize={this.visualize}
+            clearPath = {this.clearPath}
+            multipledestinations = {this.state.multipledestinations}
+            visual={this.state.visual}
+            toggleSource= {this.toggleSource}
+            toggleDestination=
+              {this.toggleDestination}/>
         </div>
+        <div id="Board">
+          <Grid start={this.state.start} end={this.state.end}
+            height={this.state.height}
+            multipledestinations = {this.state.multipledestinations}
+            bi={this.state.bi}
+            width={this.state.width}
+            grid={this.state.grid}
+            changeState={this.changeState}
+            changesourcefunc={this.changedSource}
+            changedestfunc = {this.changedDestination}
+            pointer={this.state.pointer}
+            pointer2={this.state.pointer2}
+            changeSource = {this.state.changeSource}
+            changeDestination = {this.state.changeDestination} />
+        </div>
+        <D show={this.state.modalshow} handleClose={this.hideModal} />
+        <PathModal show={this.state.pathmodal}
+          handleClose={this.hidePathModal} pathlength={this.state.pathlength} />
+        {this.state.showInstruct ? <Instruct /> : null}
+
+
+      </div>
     );
   }
 }

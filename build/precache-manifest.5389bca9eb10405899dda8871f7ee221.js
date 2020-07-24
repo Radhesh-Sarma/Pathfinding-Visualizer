@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2be6e36cc35328871753e05ea63c42c9",
+    "revision": "6c9d825bfa6e8a86d1eab986f619fae6",
     "url": "/mars-colonization-project/index.html"
   },
   {
-    "revision": "acb538792607ba420bce",
+    "revision": "cd712087c79dc20dc3c7",
     "url": "/mars-colonization-project/static/css/main.41cb52a3.chunk.css"
   },
   {
-    "revision": "7f109ed528e18a2d2975",
-    "url": "/mars-colonization-project/static/js/2.43aeec40.chunk.js"
+    "revision": "4b36d15ce409fa1be463",
+    "url": "/mars-colonization-project/static/js/2.cca2d666.chunk.js"
   },
   {
     "revision": "17d4ab0f68f3f6908b6e95cf7c65f310",
-    "url": "/mars-colonization-project/static/js/2.43aeec40.chunk.js.LICENSE.txt"
+    "url": "/mars-colonization-project/static/js/2.cca2d666.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "acb538792607ba420bce",
-    "url": "/mars-colonization-project/static/js/main.1ffad8ae.chunk.js"
+    "revision": "cd712087c79dc20dc3c7",
+    "url": "/mars-colonization-project/static/js/main.b705ac7b.chunk.js"
   },
   {
     "revision": "cc55670bc2b2ed2c3d8a",
@@ -38,10 +38,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "7a8733c3a3dca214cda82f97c1b02cce",
     "url": "/mars-colonization-project/static/media/mars1.7a8733c3.jpg"
-  },
-  {
-    "revision": "7bf85db4734422e58871d4d1721918f7",
-    "url": "/mars-colonization-project/static/media/mars2.7bf85db4.jpg"
   },
   {
     "revision": "6a21f55bd4ae413fa6ab72f905c7fab0",
