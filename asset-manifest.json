@@ -1,22 +1,21 @@
 {
   "files": {
     "main.css": "/mars-colonization-project/static/css/main.41cb52a3.chunk.css",
-    "main.js": "/mars-colonization-project/static/js/main.1ffad8ae.chunk.js",
-    "main.js.map": "/mars-colonization-project/static/js/main.1ffad8ae.chunk.js.map",
+    "main.js": "/mars-colonization-project/static/js/main.b705ac7b.chunk.js",
+    "main.js.map": "/mars-colonization-project/static/js/main.b705ac7b.chunk.js.map",
     "runtime-main.js": "/mars-colonization-project/static/js/runtime-main.4ea65d4a.js",
     "runtime-main.js.map": "/mars-colonization-project/static/js/runtime-main.4ea65d4a.js.map",
-    "static/js/2.43aeec40.chunk.js": "/mars-colonization-project/static/js/2.43aeec40.chunk.js",
-    "static/js/2.43aeec40.chunk.js.map": "/mars-colonization-project/static/js/2.43aeec40.chunk.js.map",
+    "static/js/2.cca2d666.chunk.js": "/mars-colonization-project/static/js/2.cca2d666.chunk.js",
+    "static/js/2.cca2d666.chunk.js.map": "/mars-colonization-project/static/js/2.cca2d666.chunk.js.map",
     "index.html": "/mars-colonization-project/index.html",
-    "precache-manifest.ba39a2abcedd689f0fc7000e858004bf.js": "/mars-colonization-project/precache-manifest.ba39a2abcedd689f0fc7000e858004bf.js",
+    "precache-manifest.5389bca9eb10405899dda8871f7ee221.js": "/mars-colonization-project/precache-manifest.5389bca9eb10405899dda8871f7ee221.js",
     "service-worker.js": "/mars-colonization-project/service-worker.js",
     "static/css/main.41cb52a3.chunk.css.map": "/mars-colonization-project/static/css/main.41cb52a3.chunk.css.map",
-    "static/js/2.43aeec40.chunk.js.LICENSE.txt": "/mars-colonization-project/static/js/2.43aeec40.chunk.js.LICENSE.txt",
+    "static/js/2.cca2d666.chunk.js.LICENSE.txt": "/mars-colonization-project/static/js/2.cca2d666.chunk.js.LICENSE.txt",
     "static/media/LANDING.png": "/mars-colonization-project/static/media/LANDING.ee7b2b54.png",
     "static/media/index.css": "/mars-colonization-project/static/media/bg.92e5dcd4.png",
     "static/media/mars-rover.svg": "/mars-colonization-project/static/media/mars-rover.59452d47.svg",
     "static/media/mars1.jpg": "/mars-colonization-project/static/media/mars1.7a8733c3.jpg",
-    "static/media/mars2.jpg": "/mars-colonization-project/static/media/mars2.7bf85db4.jpg",
     "static/media/mars3.jpg": "/mars-colonization-project/static/media/mars3.6a21f55b.jpg",
     "static/media/mars4.png": "/mars-colonization-project/static/media/mars4.17d38c2f.png",
     "static/media/mars5.jpg": "/mars-colonization-project/static/media/mars5.548733ff.jpg",
@@ -27,8 +26,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.4ea65d4a.js",
-    "static/js/2.43aeec40.chunk.js",
+    "static/js/2.cca2d666.chunk.js",
     "static/css/main.41cb52a3.chunk.css",
-    "static/js/main.1ffad8ae.chunk.js"
+    "static/js/main.b705ac7b.chunk.js"
   ]
 }
